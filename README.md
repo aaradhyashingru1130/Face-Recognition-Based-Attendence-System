@@ -1,7 +1,7 @@
 Face Recognition-Based Attendance System
 
 A smart attendance management system that uses Face Recognition and Machine Learning 
-to automatically mark attendance through a webcam. Built using Python, Flask, OpenCV, Scikit-learn, and Pandas.
+to mark attendance through a webcam automatically. Built using Python, Flask, OpenCV, Scikit-learn, and Pandas.
 
 Features:
 Face detection using OpenCV
@@ -61,8 +61,12 @@ Faces are recognised in real time
 Attendance is stored in a CSV file
 
 Attendance Format:
-Name, Roll, Time
-John,101,09:30:25
+Name, 
+Roll, 
+Time
+John,
+101,
+09:30:25
 
 Future Improvements:
 Database integration
