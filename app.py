@@ -59,17 +59,46 @@ def identify_face(facearray):
 def train_model():
     faces = []
     labels = []
+
     userlist = os.listdir('static/faces')
+
     for user in userlist:
-        for imgname in os.listdir(f'static/faces/{user}'):
-            img = cv2.imread(f'static/faces/{user}/{imgname}')
-            resized_face = cv2.resize(img, (50, 50))
-            faces.append(resized_face.ravel())
-            labels.append(user)
+        user_path = os.path.join('static/faces', user)
+
+        # Skip non-folder files
+        if not os.path.isdir(user_path):
+            continue
+
+        for imgname in os.listdir(user_path):
+            img_path = os.path.join(user_path, imgname)
+
+            # Read image
+            img = cv2.imread(img_path)
+
+            # Skip invalid images
+            if img is None:
+                print(f"Could not read image: {img_path}")
+                continue
+
+            try:
+                resized_face = cv2.resize(img, (50, 50))
+                faces.append(resized_face.flatten())
+                labels.append(user)
+
+            except Exception as e:
+                print(f"Error processing {img_path}: {e}")
+
+    # Convert to numpy array
     faces = np.array(faces)
-    knn = KNeighborsClassifier(n_neighbors=5)
-    knn.fit(faces, labels)
-    joblib.dump(knn, 'static/face_recognition_model.pkl')
+
+    # Train model only if faces exist
+    if len(faces) > 0:
+        knn = KNeighborsClassifier(n_neighbors=5)
+        knn.fit(faces, labels)
+        joblib.dump(knn, 'static/face_recognition_model.pkl')
+        print("Model trained successfully!")
+    else:
+        print("No valid face images found.")
 
 
 # Extract info from today's attendance file in attendance folder
