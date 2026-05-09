@@ -61,12 +61,8 @@ Faces are recognised in real time
 Attendance is stored in a CSV file
 
 Attendance Format:
-Name, 
-Roll, 
-Time
-John,
-101,
-09:30:25
+Name, Roll, Time
+John,101,09:30:25
 
 Future Improvements:
 Database integration
