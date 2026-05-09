@@ -7,7 +7,7 @@ Features:
 Face detection using OpenCV
 Face recognition using KNN Classifier
 Automatic attendance marking
-Stores attendance in CSV format
+Stores attendance in CSV format.
 Add and manage users
 Real-time webcam detection
 Flask-based web interface
